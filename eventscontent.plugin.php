@@ -2,23 +2,6 @@
 
 class eventsContent extends Plugin
 { 
-	
-	/**
-	 * Required plugin info() implementation provides info to Habari about this plugin.
-	 */ 
-	public function info()
-	{
-		return array (
-			'name' => 'EventsContent',
-			'url' => 'http://www.squareweave.com.au',
-			'author' => 'Luke @ Squareweave',
-			'authorurl' => 'http://luke.giuliani.com.au',
-			'version' => 0.1,
-			'description' => 'Adds the event Content-Type',
-			'license' => 'ASL 2.0',
-		);
-	}
-
 	/**
 	 * Create help file
 	 */
