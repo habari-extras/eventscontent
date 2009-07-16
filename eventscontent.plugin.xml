@@ -1,0 +1,9 @@
+<plugin>
+	<name>EventsContent</name>
+	<url>http://squareweave.com.au</url>
+	<author>Luke @ Squareweave</author>
+	<authorurl>http://luke.giuliani.com.au</authorurl>
+	<description>Adds the event Content Type</description>
+	<license>ASL 2.0</license>
+</plugin>
+
