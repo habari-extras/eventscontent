@@ -2,6 +2,7 @@
 
 class eventsContent extends Plugin
 { 
+	
 	/**
 	 * Create help file
 	 */
@@ -66,15 +67,14 @@ class eventsContent extends Plugin
 	 * Modify publish form. We're going to add the custom 'address' field, as we like
 	 * to hold our events at addresses.
 	 */
-	public function action_form_publish($form, $post)
+	public function action_form_publish($form, $post, $context)
 	{
 	  // only edit the form if it's an event
-		if ($post->content_type == Post::type('event')) {
+		if ($form->content_type->value == Post::type('event')) {
       // just want to add a text field
-			$address= $form->append('text', 'url', 'null:null', _t('Event Address'), 'admincontrol_text');
-			$address->value= $post->info->address;
-			// put it after the content
-			$form->move_after($address, $form->content);
+      $form->insert('tags', 'text', 'address', 'null:null', _t('Event Address'), 'admincontrol_textArea');
+      $form->address->value = $post->info->address;
+      $form->address->template = 'admincontrol_text';
 		}
 	}
 	
@@ -84,7 +84,6 @@ class eventsContent extends Plugin
 	public function action_publish_post( $post, $form )
 	{
 		if ($post->content_type == Post::type('event')) {
-			$this->action_form_publish($form, $post);
 			// Address exists because we made it in action_form_publish()
 			$post->info->address = $form->address->value;
 		}
