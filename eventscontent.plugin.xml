@@ -1,11 +1,9 @@
-<plugin>
+<?xml version="1.0" encoding="utf-8" ?>
+<pluggable type="plugin">
 	<name>EventsContent</name>
-	<url>http://squareweave.com.au</url>
-	<author>Luke @ Squareweave</author>
-	<authorurl>http://luke.giuliani.com.au</authorurl>
+	<author url="http://luke.giuliani.com.au">Luke @ Squareweave</author>
+	<author url="htto://konzertheld.de">Konzertheld</author>
 	<description>Adds the event Content Type</description>
 	<license>ASL 2.0</license>
-	<version>0.2</version>
-</plugin>
-
- 
+	<version>0.3</version>
+</pluggable>
