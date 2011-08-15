@@ -46,7 +46,7 @@ class EventsContent extends Plugin
 	public function action_init()
 	{		
 		// Create templates
-		$this->add_template('event.single', dirname(__FILE__) . '/event.single.php');
+		// $this->add_template('event.single', dirname(__FILE__) . '/event.single.php');
 	}
 	
 	/**
@@ -157,9 +157,12 @@ class EventsContent extends Plugin
 			// Save date and time as unix timestamp so we can order by date.
 			// Multiday events are supported by the following function, but first we do some formatting preparation
 			// This actually reverts what format_date_out() did before
-			$eventdate = str_replace("-", ";", $form->eventdate->value);
-			$eventdate = str_replace(" ", "", $eventdate);
-			$post->info->eventdate = EventsContent::eventdate_to_unix($eventdate);
+			if(!empty($eventdate))
+			{
+				$eventdate = str_replace("-", ";", $form->eventdate->value);
+				$eventdate = str_replace(" ", "", $eventdate);
+				$post->info->eventdate = EventsContent::eventdate_to_unix($eventdate);
+			}
 			// For the time, the reverting is simpler as multiple times are not yet supported
 			// If the field is empty, we remove the time from the database
 			// That's necessary because otherwise format_time_out would use the current time
@@ -237,7 +240,7 @@ class EventsContent extends Plugin
     }
 	
 	/**
-	 * Add events to the atom feed
+	 * Add events to the global posts atom feed
 	 **/
 	public function filter_atom_get_collection_content_type( $content_type )
     {
@@ -301,5 +304,7 @@ class EventsContent extends Plugin
 	{
 		return EventsContent::format_time_out($value);
 	}
+	
+	
 }
 ?>
