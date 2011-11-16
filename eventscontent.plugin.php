@@ -15,14 +15,6 @@ class EventsContent extends Plugin
 	}
 
 	/**
-	* Add update beacon support
-	**/
-	public function action_update_check()
-	{
-		Update::add( $this->info->name, 'c330c3fe-3f34-47ff-b5c7-51b2269cfaed', $this->info->version );
-	}
-	
-	/**
 	 * Register content type
 	 **/
 	public function action_plugin_activation( $plugin_file )

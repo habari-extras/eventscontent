@@ -4,6 +4,7 @@
 	<author url="http://luke.giuliani.com.au">Luke @ Squareweave</author>
 	<author url="htto://konzertheld.de">Konzertheld</author>
 	<description>Adds the event Content Type</description>
-	<license>ASL 2.0</license>
+	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
 	<version>0.3</version>
+	<guid>c330c3fe-3f34-47ff-b5c7-51b2269cfaed</guid>
 </pluggable>
