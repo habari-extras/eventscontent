@@ -15,6 +15,14 @@ class EventsContent extends Plugin
 	}
 
 	/**
+	* Add update beacon support
+	**/
+	public function action_update_check()
+	{
+		Update::add( $this->info->name, 'c330c3fe-3f34-47ff-b5c7-51b2269cfaed', $this->info->version );
+	}
+	
+	/**
 	 * Register content type
 	 **/
 	public function action_plugin_activation( $plugin_file )
@@ -149,20 +157,24 @@ class EventsContent extends Plugin
 			// Save date and time as unix timestamp so we can order by date.
 			// Multiday events are supported by the following function, but first we do some formatting preparation
 			// This actually reverts what format_date_out() did before
+			$eventdate = $form->eventdate->value;
 			if(!empty($eventdate))
 			{
-				$eventdate = str_replace("-", ";", $form->eventdate->value);
-				$eventdate = str_replace(" ", "", $eventdate);
 				$post->info->eventdate = EventsContent::eventdate_to_unix($eventdate);
 			}
+			else $post->info->eventdate = ":P";
 			// For the time, the reverting is simpler as multiple times are not yet supported
 			// If the field is empty, we remove the time from the database
 			// That's necessary because otherwise format_time_out would use the current time
 			$eventtime = $form->eventtime->value;
 			if(isset($eventtime) && !empty($eventtime))
+			{
 				$post->info->eventtime = HabariDateTime::date_create($eventtime)->int;
+			}
 			else
+			{
 				unset($post->info->eventtime);
+			}
 		}
 	}
 	
@@ -172,7 +184,10 @@ class EventsContent extends Plugin
 	 **/
 	public static function eventdate_to_unix($eventdatestring)
 	{
-		$dates = explode(";", $eventdatestring, 2);
+		if(strpos($eventdatestring, ";") === false)
+			return HabariDateTime::date_create($eventdatestring)->int;
+			
+		$dates = explode(";", $eventdatestring);
 		foreach($dates as $datestring)
 		{
 			try
