@@ -162,7 +162,7 @@ class EventsContent extends Plugin
 			{
 				$post->info->eventdate = EventsContent::eventdate_to_unix($eventdate);
 			}
-			else $post->info->eventdate = ":P";
+			else $post->info->eventdate = "";
 			// For the time, the reverting is simpler as multiple times are not yet supported
 			// If the field is empty, we remove the time from the database
 			// That's necessary because otherwise format_time_out would use the current time
@@ -184,6 +184,7 @@ class EventsContent extends Plugin
 	 **/
 	public static function eventdate_to_unix($eventdatestring)
 	{
+		$eventdatestring = str_replace("-", ";", $eventdatestring);
 		if(strpos($eventdatestring, ";") === false)
 			return HabariDateTime::date_create($eventdatestring)->int;
 			
@@ -201,12 +202,20 @@ class EventsContent extends Plugin
 	}
 
 	/**
-	 * Add the 'events' type to the list of templates that we can use. This is what makes Habari display events in the global post output.
-	 **/
-	public function filter_template_user_filters($filters) {
-		if(isset($filters['content_type'])) {
-			$filters['content_type']= Utils::single_array( $filters['content_type'] );
-			$filters['content_type'][]= Post::type('event');
+	 * Add the posts to the blog home and it's pagination pages
+	 * Thanks to lildude for the fix included in this function
+	 */
+	public function filter_template_user_filters( $filters ) 
+	{
+		// Cater for the home page which uses presets as of d918a831
+		if ( isset( $filters['preset'] ) ) {
+			$filters['preset'] = 'events';
+		} else {		
+			// Cater for other pages like /page/1 which don't use presets yet
+			if ( isset( $filters['content_type'] ) ) {
+				$filters['content_type'] = Utils::single_array( $filters['content_type'] );
+				$filters['content_type'][] = Post::type( 'event' );
+			}
 		}
 		return $filters;
 	}
