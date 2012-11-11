@@ -2,18 +2,6 @@
 
 class EventsContent extends Plugin
 { 
-	
-	/**
-	 * Create help file
-	 **/
-	public function help() {
-		$str= '';
-		$str.= '<p>EventsContent adds the event content type to add events that basically have a date and a location. Comes with a rewrite rule to display events by location.</p>';
-		$str.= '<h3>Installation Instructions</h3>';
-		$str.= '<p>Your theme needs to have a <code>event.single</code> template, or a generic <code>single</code> template. If it does not, you can usually copy <code>entry.single</code> to <code>event.single</code> and use it.</p>';
-		return $str;
-	}
-
 	/**
 	* Add update beacon support
 	**/

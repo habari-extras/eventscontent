@@ -7,4 +7,11 @@
 	<license url="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License 2.0</license>
 	<version>0.4</version>
 	<guid>c330c3fe-3f34-47ff-b5c7-51b2269cfaed</guid>
+	<help>
+		<value>
+			<![CDATA[<p>EventsContent adds the event content type to add events that basically have a date and a location. Comes with a rewrite rule to display events by location.</p>
+			<h3>Installation Instructions</h3>
+			<p>Your theme needs to have a <code>event.single</code> template, or a generic <code>single</code> template. If it does not, you can usually copy <code>entry.single</code> to <code>event.single</code> and use it.</p>]]>
+		</value>
+	</help>
 </pluggable>
