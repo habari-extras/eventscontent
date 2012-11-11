@@ -1,0 +1,14 @@
+- Available additional variables for theming (all via $yourpost->info->variablename):
+eventdate - the event's date as unix timestamp
+eventtime - the event's time as unix timestamp
+eventdate_out - the event's date in a readable format (see 0.2)
+eventtime_out - the event's time in a readable format (see 0.2)
+location
+eventtag
+
+Since 0.3:
+- Create event posts that have location, time and date, and a tag for grouping multiple posts dealing with the same event
+- Search posts by location: In the admin interface, type location:xxx into the search field. For the frontend, access http://yourblog.tld/yourhabarifolder/location/xxx
+- Search posts by event: Same as location, but it's eventtag:xxx and /eventtag/xxx
+- Output preformatted dates: Use $post->info->eventdate_out to display the event's date properly (it uses the system's default format or, if a user is logged in, the user's format)
+- Same for eventtime_out
