@@ -15,7 +15,7 @@ class EventsContent extends Plugin
 	 **/
 	public function action_plugin_activation( $plugin_file )
 	{
-    // add the content type.
+		// add the content type.
 		Post::add_new_type( 'event' );
 		
 		// Give anonymous users access
